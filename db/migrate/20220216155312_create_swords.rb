@@ -1,4 +1,4 @@
-class CreateSwords < ActiveRecord::Migration
+class CreateSwords < ActiveRecord::Migration[4.2]
   def change
     create_table :swords do |t|
       t.text :name

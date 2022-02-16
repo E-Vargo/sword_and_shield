@@ -1,4 +1,4 @@
-class CreateShields < ActiveRecord::Migration
+class CreateShields < ActiveRecord::Migration[4.2]
   def change
     create_table :shields do |t|
       t.text :name
