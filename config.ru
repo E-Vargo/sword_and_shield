@@ -5,3 +5,6 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 run ApplicationController
+use UsersController
+use ShieldsController
+use SwordsController
