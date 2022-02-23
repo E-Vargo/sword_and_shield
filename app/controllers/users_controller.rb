@@ -1,5 +1,12 @@
 class UsersController < ApplicationController
 
+  get '/users/:slug' do 
+    @user = User.find_by_slug(params[:slug])
+    @swords = @user.swords
+    @shields = @user.shields
+    erb :'users/show.html'
+  end
+
   # GET: /users
   get "/users" do
     @users = User.all
