@@ -4,6 +4,7 @@ class CreateSwords < ActiveRecord::Migration[4.2]
       t.text :name
       t.integer :value
       t.text :lethality
+      t.integer :user_id
 
       t.timestamps null: false
     end

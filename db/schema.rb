@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2022_02_16_155836) do
     t.text "name"
     t.integer "value"
     t.text "defensiveness"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -24,13 +25,14 @@ ActiveRecord::Schema.define(version: 2022_02_16_155836) do
     t.text "name"
     t.integer "value"
     t.text "lethality"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.text "name"
-    t.text "password"
+    t.text "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

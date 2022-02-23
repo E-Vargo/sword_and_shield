@@ -2,7 +2,11 @@ class SwordsController < ApplicationController
 
   # GET: /swords
   get "/swords" do
-    erb :"/swords/index.html"
+    if logged_in?
+    erb :'/swords/index.html'
+    else
+      erb :'/users/login.html'
+    end
   end
 
   # GET: /swords/new

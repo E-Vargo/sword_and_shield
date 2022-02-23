@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   # GET: /users
   get "/users" do
+    @users = User.all
     erb :"/users/index.html"
   end
 
@@ -12,11 +13,27 @@ class UsersController < ApplicationController
 
   # POST: /users
   post "/users" do
-    redirect "/users"
+    if params[:name] == "" || params[:password] == ""
+      redirect to '/users/new'
+    else
+      @user = User.create(name: params[:name], password: params[:password])
+      session[:user_id] = @user.id
+      redirect to '/users'
+    end
+  end
+
+  get "/login" do 
+    if !logged_in?
+      erb :'users/login'
+    else 
+      redirect to '/users'
+    end
+   
   end
 
   # GET: /users/5
   get "/users/:id" do
+    @user = User.find(params[:id])
     erb :"/users/show.html"
   end
 
@@ -34,4 +51,13 @@ class UsersController < ApplicationController
   delete "/users/:id/delete" do
     redirect "/users"
   end
+
+  get '/logout' do 
+    if !logged_in?
+        redirect to '/'
+    else
+        session.destroy
+        redirect to '/login'
+    end
+end
 end

@@ -1,1 +1,5 @@
-<h1>This is the Model's index page.</h1>
+<h1>---Warriors---</h1>
+<h3>Here follows the names of all great warriors of our time:</h3>
+<% @users.each do |u| %>
+<%= u.name %><br/>
+<% end %>

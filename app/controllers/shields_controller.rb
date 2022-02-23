@@ -2,27 +2,54 @@ class ShieldsController < ApplicationController
 
   # GET: /shields
   get "/shields" do
+    if logged_in?
+    @shields = Shield.all
     erb :"/shields/index.html"
+    else
+      redirect to '/login'
+    end
   end
 
   # GET: /shields/new
   get "/shields/new" do
+    if logged_in?
     erb :"/shields/new.html"
+    else 
+      redirect to '/login'
+    end
   end
 
   # POST: /shields
   post "/shields" do
-    redirect "/shields"
+    if params[:defensiveness] != "" && params[:name] != "" && params[:value] != nil
+      Shield.create(name: params[:name], value: params[:value], defensiveness: params[:defensiveness], user_id: params[:user_id])
+    else
+    redirect to "/shields/new"
+    end
   end
 
   # GET: /shields/5
   get "/shields/:id" do
+    if logged_in?
+    @shield = Shield.find(params[:id])
     erb :"/shields/show.html"
+    else
+      redirect to '/login'
+    end
   end
 
   # GET: /shields/5/edit
   get "/shields/:id/edit" do
-    erb :"/shields/edit.html"
+    if logged_in?
+    @shield = Shield.find(params[:id])
+      if @shield && @shield.user == current_user
+        erb :"/shields/edit.html"
+      else
+        redirect to '/shields'
+      end
+    else 
+      redirect to '/login'
+    end
   end
 
   # PATCH: /shields/5

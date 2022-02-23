@@ -1,1 +1,10 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1>Warrior:</h1>
+Name:<%= @user.name %><br/>
+Swords:
+<% @user.swords.each do |s| %>
+    <%= s.name %>
+<% end %><br/>
+Shields:
+<% @user.shields.each do |s| %>
+    <%= s.name %>
+<% end %><br/>
