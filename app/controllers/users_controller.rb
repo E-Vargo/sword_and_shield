@@ -2,9 +2,13 @@ class UsersController < ApplicationController
 
   get '/users/:slug' do 
     @user = User.find_by_slug(params[:slug])
-    @swords = @user.swords
-    @shields = @user.shields
+    if @user
+      @user.swords ? @swords = @user.swords : @swords = nil
+      @user.shields ? @shields = @user.shields : @shields = nil
     erb :'users/show.html'
+    else
+      redirect to '/users'
+    end
   end
 
   # GET: /users

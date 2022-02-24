@@ -1,10 +1,12 @@
 <h1>Warrior:</h1>
 Name:<%= @user.name %><br/>
-Swords:
-<% @user.swords.each do |s| %>
+Sword(s):
+<% @swords.each do |s| %>
     <%= s.name %>
 <% end %><br/>
-Shields:
-<% @user.shields.each do |s| %>
+Shield(s):
+<% @shields.each do |s| %>
     <%= s.name %>
 <% end %><br/>
+<a href="/users/<%= @user.user_id %>/edit">-Edit Warrior-</a><br/>
+<a href="/users">-Warrior List-</a>
