@@ -1,20 +1,28 @@
 class UsersController < ApplicationController
 
   get '/users/:slug' do 
-    @user = User.find_by_slug(params[:slug])
-    if @user
-      @user.swords ? @swords = @user.swords : @swords = nil
-      @user.shields ? @shields = @user.shields : @shields = nil
-    erb :'users/show.html'
-    else
-      redirect to '/users'
+    if logged_in?
+      @user = User.find_by_slug(params[:slug])
+      if @user
+        @user.swords ? @swords = @user.swords : @swords = nil
+        @user.shields ? @shields = @user.shields : @shields = nil
+      erb :'users/show.html'
+      else
+        redirect to '/users'
+      end
+    else 
+      redirect to '/login'
     end
   end
 
   # GET: /users
   get "/users" do
     @users = User.all
+    if logged_in?
     erb :"/users/index.html"
+    else 
+      redirect to '/login'
+    end
   end
 
   # GET: /users/new
@@ -35,7 +43,7 @@ class UsersController < ApplicationController
 
   get "/login" do 
     if !logged_in?
-      erb :'users/login'
+      erb :'users/login.html'
     else 
       redirect to '/users'
     end
@@ -54,13 +62,21 @@ class UsersController < ApplicationController
 
   # GET: /users/5
   get "/users/:id" do
+    if logged_in?
     @user = User.find(params[:id])
     erb :"/users/show.html"
+    else 
+      redirect to '/login'
+    end
   end
 
   # GET: /users/5/edit
   get "/users/:id/edit" do
+    if session[:user_id] == User.find(params[:id]).id
     erb :"/users/edit.html"
+    else 
+      redirect to '/users'
+    end
   end
 
   # PATCH: /users/5
