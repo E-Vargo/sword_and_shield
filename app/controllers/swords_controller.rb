@@ -26,12 +26,17 @@ class SwordsController < ApplicationController
 
   # GET: /swords/new
   get "/swords/new" do
-    erb :"/swords/new.html"
+    erb :'/swords/new.html'
   end
 
   # POST: /swords
   post "/swords" do
-    redirect "/swords"
+    if params[:name] == "" || params[:value] == "" || params[:lethality] == ""
+      redirect to "/swords/new"
+    else 
+      @sword = Sword.create(name: params[:name], value: params[:value].to_i, lethality: params[:lethality])
+      redirect to '/swords'
+    end
   end
 
   # GET: /swords/5
