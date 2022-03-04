@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+      # GET: /users/new
+  get "/users/new" do
+    erb :"/users/new.html"
+  end
+
   get '/users/:slug' do 
     if logged_in?
       @user = User.find_by_slug(params[:slug])
@@ -23,11 +28,6 @@ class UsersController < ApplicationController
     else 
       redirect to '/login'
     end
-  end
-
-  # GET: /users/new
-  get "/users/new" do
-    erb :"/users/new.html"
   end
 
   # POST: /users
