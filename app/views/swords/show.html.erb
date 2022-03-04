@@ -1,1 +1,7 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1>--Sword--</h1>
+<h3>Owner: <%= @sword.user %></h3>
+<h3>Name: <%= @sword.name %></h3>
+<h3>Value: <%= @sword.value %></h3>
+<h3>Lethality: <%= @sword.lethality %></h3>
+<a href="/swords/<%= @sword.id %>/edit">-Edit Sword-</a><br/>
+<a href="/swords">-Sword List-</a>
