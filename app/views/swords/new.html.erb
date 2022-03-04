@@ -1,5 +1,8 @@
 <h1>--New Sword--</h1>
 <form method="post" action="/swords">
+<% @users.each do |u| %>
+<input type="radio" name="owner" id="<%= u.id %>" value="<%=u.id%>"><%=u.name%></input><br/>
+<% end %>
 Name:<input type="text" name="name" id="sword_id"><br/>
 Value:<input type="text" name="value" id="sword_value"><br/>
 Lethality: <input type="text" name="lethality" id="sword_lethality"></br>

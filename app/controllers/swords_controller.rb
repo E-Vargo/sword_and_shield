@@ -1,6 +1,7 @@
 class SwordsController < ApplicationController
 
   get "/swords/new" do
+    @users = User.all
     if logged_in?
     erb :'/swords/new.html'
     else
@@ -38,6 +39,8 @@ class SwordsController < ApplicationController
       redirect to "/swords/new"
     else 
       @sword = Sword.create(name: params[:name], value: params[:value].to_i, lethality: params[:lethality])
+      @sword.user = User.find_by_id(params[:id])
+      @sword.save
       redirect to '/swords'
     end
   end
