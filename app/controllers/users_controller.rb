@@ -73,6 +73,7 @@ class UsersController < ApplicationController
   # GET: /users/5/edit
   get "/users/:id/edit" do
     if session[:user_id] == User.find(params[:id]).id
+      @user = User.find(params[:id])
     erb :"/users/edit.html"
     else 
       redirect to '/users'
@@ -80,8 +81,14 @@ class UsersController < ApplicationController
   end
 
   # PATCH: /users/5
-  patch "/users/:id" do
+  patch '/users/:id' do
+    @user = User.find(params[:id])
+    if params[:name] != ""
+      @user.update(name: params[:name])
+      redirect to '/users/:id'
+    else
     redirect "/users/:id"
+    end
   end
 
   # DELETE: /users/5/delete

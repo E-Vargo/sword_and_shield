@@ -1,7 +1,22 @@
 class SwordsController < ApplicationController
 
+  get '/swords/:slug' do 
+    if logged_in?
+      @sword = Sword.find_by_slug(params[:slug])
+      if @sword
+        @sword.user ? @user = @sword.user : @user = nil
+      erb :'swords/show.html'
+      else
+        redirect to '/swords'
+      end
+    else 
+      redirect to '/login'
+    end
+  end
+
   # GET: /swords
   get "/swords" do
+    @swords = Sword.all
     if logged_in?
     erb :'/swords/index.html'
     else

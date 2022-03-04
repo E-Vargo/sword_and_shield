@@ -1,1 +1,6 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h3>Edit Warrior Name</p3>
+<form method="post" action="/users/<%=@user.id%>">
+<input id="hidden" type="hidden" name="_method" value="PATCH">
+Warrior Name: <input type="text" name="name" value="<%=@user.name%>">
+<input type="submit" value="Submit">
+</form>
