@@ -3,7 +3,6 @@ class UsersController < ApplicationController
       # GET: /users/new
   get "/users/new" do
     erb :"/users/new.html"
-    #@swords = Sword.all.collect {|s| s.user_id == nil}
   end
 
   get '/users/:slug' do 
@@ -12,8 +11,6 @@ class UsersController < ApplicationController
       @swords = Sword.all.select {|s| s.user_id == @user.id}
       @shields = Shield.all.select {|s| s.user_id == @user.id}
       if @user
-        #@user.swords ? @swords = @user.swords : @swords = nil
-        #@user.shields ? @shields = @user.shields : @shields = nil
       erb :'users/show.html'
       else
         redirect to '/users'
