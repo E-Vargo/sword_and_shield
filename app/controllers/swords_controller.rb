@@ -52,7 +52,17 @@ class SwordsController < ApplicationController
 
   # GET: /swords/5/edit
   get "/swords/:id/edit" do
-    erb :"/swords/edit.html"
+    @users = User.all
+    @sword = Sword.find(params[:id])
+    if logged_in?
+      if current_user.id == @sword.user_id
+        erb :'/swords/edit.html'
+      else
+        redirect to '/swords'
+      end
+    else
+      redirect to '/login'
+    end
   end
 
   # PATCH: /swords/5
