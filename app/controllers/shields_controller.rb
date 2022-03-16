@@ -61,8 +61,9 @@ class ShieldsController < ApplicationController
 
   # GET: /shields/5/edit
   get "/shields/:id/edit" do
-    if logged_in?
+    @users = User.all
     @shield = Shield.find(params[:id])
+    if logged_in?
       if @shield && @shield.user == current_user
         erb :"/shields/edit.html"
       else
