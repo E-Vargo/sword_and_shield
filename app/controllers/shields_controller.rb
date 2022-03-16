@@ -1,23 +1,41 @@
 class ShieldsController < ApplicationController
 
-  # GET: /shields
-  get "/shields" do
-    if logged_in?
-    @shields = Shield.all
-    erb :"/shields/index.html"
-    else
-      redirect to '/login'
+    # GET: /shields/new
+    get "/shields/new" do
+      @users = User.all
+      if logged_in?
+      erb :"/shields/new.html"
+      else 
+        redirect to '/login'
+      end
     end
-  end
 
-  # GET: /shields/new
-  get "/shields/new" do
+
+  get '/shields/:slug' do 
     if logged_in?
-    erb :"/shields/new.html"
+      @shield = Shield.find_by_slug(params[:slug])
+      if @shield
+        @shield.user ? @user = @shield.user : @user = nil
+      erb :'shields/show.html'
+      else
+        redirect to '/shields'
+      end
     else 
       redirect to '/login'
     end
   end
+
+
+
+    # GET: /shields
+    get "/shields" do
+      if logged_in?
+      @shields = Shield.all
+      erb :"/shields/index.html"
+      else
+        redirect to '/login'
+      end
+    end
 
   # POST: /shields
   post "/shields" do
