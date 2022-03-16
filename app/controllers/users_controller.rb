@@ -3,6 +3,7 @@ class UsersController < ApplicationController
       # GET: /users/new
   get "/users/new" do
     erb :"/users/new.html"
+    #@swords = Sword.all.collect {|s| s.user_id == nil}
   end
 
   get '/users/:slug' do 
@@ -64,6 +65,7 @@ class UsersController < ApplicationController
   get "/users/:id" do
     if logged_in?
     @user = User.find(params[:id])
+    @swords = Sword.all.collect {|s| s.user_id == @user.id}
     erb :"/users/show.html"
     else 
       redirect to '/login'
@@ -82,12 +84,13 @@ class UsersController < ApplicationController
 
   # PATCH: /users/5
   patch '/users/:id' do
-    @user = User.find(params[:id])
+  
     if params[:name] != ""
+      @user = User.find(params[:id])
       @user.update(name: params[:name])
-      redirect to '/users/:id'
+      redirect to '/users'
     else
-    redirect "/users/:id"
+    redirect to "/users"
     end
   end
 

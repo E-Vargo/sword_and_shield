@@ -1,11 +1,9 @@
 <h3>Edit Warrior Name</p3>
-<form method="post" action="/users/<%=@user.id%>">
+<form method="post" action="/users/<%= @user.id %>">
 <input type="hidden" name="_method" value="PATCH">
 Warrior Name: <input type="text" name="name" value="<%=@user.name%>">
 <h3>Add Sword(s)</p3>
 <h3>Add Shield(s)</p3>
-<h3>Create Sword</p3>
-<h3>Create Shield</p3>
 <br/>
 <input type="submit" value="Submit">
 </form>
