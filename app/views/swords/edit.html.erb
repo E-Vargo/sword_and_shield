@@ -3,8 +3,8 @@
 <% @users.each do |u| %>
 <input type="radio" name="owner" id="<%= u.id %>" value="<%=u.id%>"><%=u.name%></input><br/>
 <% end %>
-Name:<input type="text" name="name" id="sword_id"><br/>
-Value:<input type="text" name="value" id="sword_value"><br/>
-Lethality: <input type="text" name="lethality" id="sword_lethality"></br>
+Name:<input type="text" name="name" id="sword_id" value="<%= @sword.name %>"><br/>
+Value:<input type="text" name="value" id="sword_value" value="<%= @sword.value %>"><br/>
+Lethality: <input type="text" name="lethality" id="sword_lethality" value="<%= @sword.lethality %>"></br>
 <input type="submit" value="Edit Sword">
 </form>

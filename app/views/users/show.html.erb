@@ -2,11 +2,11 @@
 Name:<%= @user.name %><br/>
 Sword(s):
 <% @swords.each do |s| %>
-    <%= s.name %>
+    <%= s.name %>,
 <% end %><br/>
 Shield(s):
 <% @shields.each do |s| %>
-    <%= s.name %>
+    <%= s.name %>,
 <% end %><br/>
 <a href="/users/<%= @user.id %>/edit">-Edit Warrior-</a><br/>
 <a href="/users">-Warrior List-</a>
