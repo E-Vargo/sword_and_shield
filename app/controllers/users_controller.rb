@@ -9,9 +9,11 @@ class UsersController < ApplicationController
   get '/users/:slug' do 
     if logged_in?
       @user = User.find_by_slug(params[:slug])
+      @swords = Sword.all.select {|s| s.user_id == @user.id}
+      @shields = Shield.all.select {|s| s.user_id == @user.id}
       if @user
-        @user.swords ? @swords = @user.swords : @swords = nil
-        @user.shields ? @shields = @user.shields : @shields = nil
+        #@user.swords ? @swords = @user.swords : @swords = nil
+        #@user.shields ? @shields = @user.shields : @shields = nil
       erb :'users/show.html'
       else
         redirect to '/users'
@@ -65,7 +67,6 @@ class UsersController < ApplicationController
   get "/users/:id" do
     if logged_in?
     @user = User.find(params[:id])
-    @swords = Sword.all.collect {|s| s.user_id == @user.id}
     erb :"/users/show.html"
     else 
       redirect to '/login'
@@ -84,7 +85,6 @@ class UsersController < ApplicationController
 
   # PATCH: /users/5
   patch '/users/:id' do
-  
     if params[:name] != ""
       @user = User.find(params[:id])
       @user.update(name: params[:name])

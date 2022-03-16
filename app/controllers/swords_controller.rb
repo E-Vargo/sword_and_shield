@@ -39,7 +39,7 @@ class SwordsController < ApplicationController
       redirect to "/swords/new"
     else 
       @sword = Sword.create(name: params[:name], value: params[:value].to_i, lethality: params[:lethality])
-      @sword.user = User.find_by_id(params[:id])
+      @sword.user_id = params[:owner].to_i
       @sword.save
       redirect to '/swords'
     end
