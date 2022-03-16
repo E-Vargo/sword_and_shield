@@ -1,3 +1,6 @@
-<h1>---Shields---</h1>
+<h1>---Shield---</h1>
 <h3>Here follows the names of all great shields of our time:</h3>
-<h3>Each name will be displayed as a link to the show page</h3>
+<% @shields.each do |s| %>
+<a href="/shield/<%= s.slug %>"><%= s.name %></a><br/>
+<% end %>
+<a href="/shield/new">Create Shield</a>

@@ -28,21 +28,24 @@ class ShieldsController < ApplicationController
 
 
     # GET: /shields
-    get "/shields" do
-      if logged_in?
-      @shields = Shield.all
+  get "/shields" do
+    if logged_in?
+    @shields = Shield.all
       erb :"/shields/index.html"
-      else
-        redirect to '/login'
-      end
+    else
+      redirect to '/login'
     end
+  end
 
   # POST: /shields
   post "/shields" do
-    if params[:defensiveness] != "" && params[:name] != "" && params[:value] != nil
-      Shield.create(name: params[:name], value: params[:value], defensiveness: params[:defensiveness], user_id: params[:user_id])
+    if params[:defensiveness] == "" && params[:name] == "" && params[:value] == ""
+      redirect to '/shields/new'
     else
-    redirect to "/shields/new"
+      @shield = Shield.create(name: params[:name], value: params[:value].to_i, defensiveness: params[:defensiveness], user_id: params[:user_id])
+      @shield.user_id = params[:owner].to_i
+      @shield.save
+      redirect to '/shields'
     end
   end
 
