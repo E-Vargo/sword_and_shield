@@ -1,1 +1,7 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1>--Shield--</h1>
+<h3>Owner: <%= @shield.user.name %></h3>
+<h3>Name: <%= @shield.name %></h3>
+<h3>Value: <%= @shield.value %></h3>
+<h3>Lethality: <%= @shield.defensiveness %></h3>
+<a href="/shields/<%= @shield.id %>/edit">-Edit Shield-</a><br/>
+<a href="/shields">-Shield List-</a>
