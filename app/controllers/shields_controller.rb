@@ -1,5 +1,16 @@
 class ShieldsController < ApplicationController
 
+  
+    # GET: /shields
+    get "/shields" do
+      if logged_in?
+      @shields = Shield.all
+        erb :"/shields/index.html"
+      else
+        redirect to '/login'
+      end
+    end
+
     # GET: /shields/new
     get "/shields/new" do
       @users = User.all
@@ -25,21 +36,9 @@ class ShieldsController < ApplicationController
     end
   end
 
-
-
-    # GET: /shields
-  get "/shields" do
-    if logged_in?
-    @shields = Shield.all
-      erb :"/shields/index.html"
-    else
-      redirect to '/login'
-    end
-  end
-
   # POST: /shields
   post "/shields" do
-    if params[:defensiveness] == "" && params[:name] == "" && params[:value] == ""
+    if params[:defensiveness] == "" || params[:name] == "" || params[:value] == ""
       redirect to '/shields/new'
     else
       @shield = Shield.create(name: params[:name], value: params[:value].to_i, defensiveness: params[:defensiveness], user_id: params[:user_id])
@@ -76,7 +75,14 @@ class ShieldsController < ApplicationController
 
   # PATCH: /shields/5
   patch "/shields/:id" do
-    redirect "/shields/:id"
+    if params[:defensiveness] == "" || params[:name] == "" || params[:value] == ""
+    redirect to '/shields'
+    else
+      @shield = Shield.find_by_id(params[:id])
+      @shield.update(name: params[:name], value: params[:value].to_i, defensiveness: params[:defensiveness], user_id: params[:owner].to_i)
+      redirect to '/shields'
+    end
+  
   end
 
   # DELETE: /shields/5/delete

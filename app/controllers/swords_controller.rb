@@ -55,7 +55,7 @@ class SwordsController < ApplicationController
     @users = User.all
     @sword = Sword.find(params[:id])
     if logged_in?
-      if current_user.id == @sword.user_id
+      if current_user.id == @sword.user_id || @sword.user == nil
         erb :'/swords/edit.html'
       else
         redirect to '/swords'
