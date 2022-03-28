@@ -75,18 +75,25 @@ class ShieldsController < ApplicationController
 
   # PATCH: /shields/5
   patch "/shields/:id" do
-    if params[:defensiveness] == "" || params[:name] == "" || params[:value] == ""
+    if params[:defensiveness] == "" || params[:name] == "" || params[:value] == "" 
     redirect to '/shields'
     else
       @shield = Shield.find_by_id(params[:id])
       @shield.update(name: params[:name], value: params[:value].to_i, defensiveness: params[:defensiveness], user_id: params[:owner].to_i)
       redirect to '/shields'
     end
-  
   end
 
   # DELETE: /shields/5/delete
   delete "/shields/:id/delete" do
+    if logged_in?
+      @shield = Shield.find(params[:id])
+      if @shield && @shield.user_id == current_user.id 
+        @shield.delete 
+      end
     redirect "/shields"
+    else 
+      redirect "/login"
+    end
   end
 end

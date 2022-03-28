@@ -1,7 +1,7 @@
 <h1>--New Shield--</h1>
 <form method="post" action="/shields">
 <% @users.each do |u| %>
-<input type="radio" name="owner" id="<%= u.id %>" value="<%=u.id%>"><%=u.name%></input><br/>
+<input type="radio" name="owner" id="<%= u.id %>" value="<%=u.id%>" checked><%=u.name%></input><br/>
 <% end %>
 Name:<input type="text" name="name" id="shield_id"><br/>
 Value:<input type="text" name="value" id="shield_value"><br/>

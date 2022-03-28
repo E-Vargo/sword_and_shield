@@ -1,11 +1,14 @@
 <h1>--Edit Shield--</h1>
 <form method="post" action="/shields/<%= @shield.id %>">
 <input type="hidden" name="_method" value="patch">
+
 <% @users.each do |u| %>
-<input type="radio" name="owner" id="<%= u.id %>" value="<%=u.id%>"><%=u.name%></input><br/>
+<input type="radio" name="owner" id="<%= u.id %>" value="<%=u.id%>" checked><%=u.name%></input><br/>
 <% end %>
+
 Name:<input type="text" name="name" id="shield_id" value="<%= @shield.name %>"><br/>
 Value:<input type="text" name="value" id="shield_value" value="<%= @shield.value %>"><br/>
 Defensiveness: <input type="text" name="defensiveness" id="shield_defensiveness" value="<%= @shield.defensiveness %>"></br>
+
 <input type="submit" value="Edit Shield">
 </form>

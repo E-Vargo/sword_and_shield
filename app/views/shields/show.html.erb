@@ -3,4 +3,13 @@
 <h3>Name: <%= @shield.name %></h3>
 <h3>Value: <%= @shield.value %></h3>
 <h3>Defensiveness: <%= @shield.defensiveness %></h3>
+
+
+<% if @shield.user_id == current_user.id %>
 <a href="/shields/<%= @shield.id %>/edit">-Edit Shield-</a><br/>
+
+<form method="post" action="/shields/<%= @shield.id %>/delete">
+<input type="hidden" name="_method" value="delete">
+<input type="submit" value="Delete">
+</form>
+<% end %>
