@@ -3,4 +3,14 @@
 <h3>Name: <%= @sword.name %></h3>
 <h3>Value: <%= @sword.value %></h3>
 <h3>Lethality: <%= @sword.lethality %></h3>
+
+
+
+<% if @sword.user_id == current_user.id %>
 <a href="/swords/<%= @sword.id %>/edit">-Edit Sword-</a><br/>
+
+<form method="post" action="/swords/<%= @sword.id %>/delete">
+<input type="hidden" name="_method" value="delete">
+<input type="submit" value="Delete">
+</form>
+<% end %>

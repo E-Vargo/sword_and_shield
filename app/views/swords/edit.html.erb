@@ -1,10 +1,14 @@
 <h1>--Edit Sword--</h1>
-<form method="post" action="/swords">
+<form method="post" action="/swords/<%= @sword.id %>">
+<input type="hidden" name="_method" value="patch">
+
 <% @users.each do |u| %>
-<input type="radio" name="owner" id="<%= u.id %>" value="<%=u.id%>"><%=u.name%></input><br/>
+<input type="radio" name="owner" id="<%= u.id %>" value="<%=u.id%>" checked><%=u.name%></input><br/>
 <% end %>
+
 Name:<input type="text" name="name" id="sword_id" value="<%= @sword.name %>"><br/>
 Value:<input type="text" name="value" id="sword_value" value="<%= @sword.value %>"><br/>
 Lethality: <input type="text" name="lethality" id="sword_lethality" value="<%= @sword.lethality %>"></br>
+
 <input type="submit" value="Edit Sword">
 </form>

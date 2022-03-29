@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
   # POST: /users
   post "/users" do
-    if params[:name] == "" || params[:password] == ""
+    if params[:name] == "" || params[:password] == "" || User.all.find {|u| u.name == params[:name]}
       redirect to '/users/new'
     else
       @user = User.create(name: params[:name], password: params[:password])

@@ -67,11 +67,27 @@ class SwordsController < ApplicationController
 
   # PATCH: /swords/5
   patch "/swords/:id" do
-    redirect "/swords/:id"
+    if params[:name] == "" || params[:value] == "" || params[:lethality] == ""
+      redirect to '/swords'
+      else
+        @sword = Sword.find_by_id(params[:id])
+        @sword.update(name: params[:name], value: params[:value].to_i, lethality: params[:lethality])
+        @sword.user_id = params[:owner].to_i
+        @sword.save
+        redirect to '/swords'
+      end
   end
 
   # DELETE: /swords/5/delete
   delete "/swords/:id/delete" do
+    if logged_in?
+      @sword = Sword.find(params[:id])
+      if @sword && @sword.user_id == current_user.id 
+        @sword.delete 
+      end
     redirect "/swords"
+    else 
+      redirect "/login"
+    end
   end
 end
